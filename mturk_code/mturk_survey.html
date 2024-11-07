@@ -39,7 +39,6 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            height: 90vh;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -312,54 +311,75 @@
             <div class="sub-section">
                 <div class="instructions">
                     <h2>Instructions</h2>
-                    <p>
-                        Welcome to the Followup Question Generation Data Annotation Task! <br>
-                        Please read the project description below and the introductions on how to complete the
-                        annotation
-                        task.
+                    <h3>Job Description</h3>
+                    <p>The aim of this data annotation task is to select high-quality (Knowledge Goal Question, answer,
+                        follow-up question) tuples from online forums. The raw data was collected from the Reddit forum
+                        <strong>“explainlikeimfive”</strong>, which aims to provide simple, layperson-friendly
+                        explanations for real-life questions.
                     </p>
-                    <h3>Description</h3>
-                    <p>
-                        The aim of this data annotation task is to se-
-                        lect high quality (Knowledge Goal Question,
-                        answer, follow-up question) tuples from online
-                        forums. The raw data was crawled from an
-                        online educational forum Reddit in the topic
-                        of “explainlikeimfive”, which aims to provide
-                        lay person-friendly explanations for real-life
-                        questions. We collected many (question, answer)
-                        pairs from the forum, together with the replies
-                        to the answer. A common type of reply to the
-                        answer is asking follow-up questions. We selected
-                        out those follow-up questions and format each
-                        data entry as a triple of (initial question, answer,
-                        follow-up question).
-                    </p>
+                    <p>We gathered (question, answer) pairs from this forum, along with replies to those answers. Often,
+                        these replies include follow-up questions. For this task, we selected follow-up questions and
+                        formatted each data entry as a triple of (initial question, answer, follow-up question). </p>
+                    <br>
+                    <p>Our data contains some noise, such as invalid follow-up questions, sensitive information, or
+                        questions unrelated to the original question or answer. Your role is to help us identify and
+                        remove these noisy samples.</p>
+                    <p>For each HIT, you will be shown one triple (question, answer, follow-up question). Carefully
+                        review each component and answer the following questions based on your judgment:</p>
+                    <div style="background-color: #d8ebf5; padding: 15px; border-radius: 8px; margin-top: 15px; margin-left: 100px; margin-right: 100px">
+                        <h4>Questions:</h4>
+                        <ol style="text-align: left; display: inline-block; margin: 0; padding-left: 20px;">
+                            <li><strong>Q1:</strong> Do you think the follow-up question is a valid question?<br>
+                                <br><strong>A:</strong> Yes <strong>B:</strong> No
+                            </li>
+                            <br>
+                            <li><strong>Q2:</strong> Do you think the (initial question, answer, follow-up question)
+                                contains sensitive information?<br>
+                                <br><strong>A:</strong> Yes <strong>B:</strong> No
+                            </li>
+                            <br>
+                            <li><strong>Q3:</strong> Do you think the follow-up question is related to the original
+                                question and the answer?<br>
+                                <br><strong>A:</strong> Strongly Related <strong>B:</strong> Related <strong>C:</strong> Slightly Related <strong>D:</strong> Not Related
+                            </li>
+                        </ol>
+                    </div>
+                    <br>
+                    <h4 style="color: red;">After answering all questions for a single task, click next to move to the next sample. <br>Once you complete all tasks, press submit to complete the survey.</h4>
+                    <br>
                 </div>
                 <div class="examples">
                     <div style="display: flex; width: 100%;">
                         <div class="example-button-container"
                             style="width: 30%; border: 1px solid #a0c4ff; padding: 20px;">
-                            <h4>Follow-up Question Examples That Are...</h4>
+                            <h4 style="text-align: center;">Follow-up Question That Are...</h4>
+                            <hr>
                             <button class="example-buttons" onclick="changeContent('valid_example', this)">Valid
                             </button>
-                            <button class="example-buttons" onclick="changeContent('invalid_example', this)">Invalid</button>
-                            <button class="example-buttons" onclick="changeContent('inappropriate_example', this)">Inappropriate</button>
+                            <button class="example-buttons"
+                                onclick="changeContent('invalid_example', this)">Invalid</button>
+                            <button class="example-buttons"
+                                onclick="changeContent('inappropriate_example', this)">Inappropriate</button>
                             <hr>
-                            <button class="example-buttons" onclick="changeContent('strongly_related_example', this)">Strongly Related to
+                            <button class="example-buttons"
+                                onclick="changeContent('strongly_related_example', this)">Strongly Related to
                                 the
                                 Original Question</button>
-                            <button class="example-buttons" onclick="changeContent('related_example', this)">Related to the
+                            <button class="example-buttons" onclick="changeContent('related_example', this)">Related to
+                                the
                                 Original
                                 Question</button>
-                            <button class="example-buttons" onclick="changeContent('slightly_related_example', this)">Slightly Related to
+                            <button class="example-buttons"
+                                onclick="changeContent('slightly_related_example', this)">Slightly Related to
                                 the
                                 Original Question</button>
-                            <button class="example-buttons" onclick="changeContent('not_related_example', this)">Not Related to the
+                            <button class="example-buttons" onclick="changeContent('not_related_example', this)">Not
+                                Related to the
                                 Original Question</button>
                         </div>
                         <div id="right-section" style="width: 70%; border: 1px solid #a0c4ff; padding: 20px;">
-                            Select a button to see content here.
+                            <h2 style="text-align: center;">Select from one of the options on the left to view its
+                                example</h2>
                         </div>
                     </div>
                 </div>
@@ -407,6 +427,26 @@
         <script>
             const examples = {
                 invalid_example: `
+                    <div style="text-align: center;">
+                        <h3>Valid/Invalid Question Guideline</h3>
+                        <h4>Our Question: </h4><p>Do you think the follow-up question is a valid
+                        question?</p>
+                        <h4>Your Options:</h4> <p>A. Yes B. No</p>
+                        <p>Guideline: The follow-up question might contain
+                        multiple sentences but it should consist of at least
+                        one valid question. A valid question must be in
+                        question format and ask meaningful information,
+                        including Wh-questions (what/why/where/etc.),
+                        open-ended questions, probing questions and etc.
+                        Examples for invalid questions: “10000 meters?
+                        really?”, which are often used in conversational
+                        speech to express feelings instead of asking new
+                        information.</p>
+                    </div>
+
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Invalid Follow-up Questions Example #1</h3>
                     <h4><b>Initial Question:</b></h4>
                     <p>Why do seahorses still existed?</p>
@@ -433,6 +473,26 @@
                     <p>Reason: “what is that thing, is it broken?" is just the questioner’s memory, not a question asking information in the original question or the answer.</p>
                 `,
                 valid_example: `
+                    <div style="text-align: center;">
+                        <h3>Valid/Invalid Question Guideline</h3>
+                        <h4>Our Question: </h4><p>Do you think the follow-up question is a valid
+                        question?</p>
+                        <h4>Your Options:</h4> <p>A. Yes B. No</p>
+                        <p>Guideline: The follow-up question might contain
+                        multiple sentences but it should consist of at least
+                        one valid question. A valid question must be in
+                        question format and ask meaningful information,
+                        including Wh-questions (what/why/where/etc.),
+                        open-ended questions, probing questions and etc.
+                        Examples for invalid questions: “10000 meters?
+                        really?”, which are often used in conversational
+                        speech to express feelings instead of asking new
+                        information.</p>
+                    </div>
+                    
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Valid Follow-up Questions Example #1</h3>
                     <h4><b>Initial Question:</b></h4>
                     <p>ELI5: Why is the sea calm in the mornings?</p>
@@ -445,6 +505,17 @@
                     <p>Reason: The follow-up question is a “Why” question, asking specific reasons about the change of the winds during the day. Therefore, it is a valid question.</p>
                 `,
                 inappropriate_example: `
+                    <div style="text-align: center;">
+                        <h3>Inappropriate Question Guideline</h3>
+                        <h4>Our Question:</h4>
+                        <p>Do you think the (initial question, answer, follow-up question) contains racism, hate speech, sexual topics, offensive, or rude comments?</p>
+                        <h4>Your Options:</h4> 
+                        <p>A. Yes B. No</p>
+                        <p>Guideline: Examples of racist comments include: “It’s credit to your race,” “Black people will not understand.” Examples of hate speech include: “He should go back to where he comes from,” “All Mexicans are rapists.” Examples of offensive or rude comments include: “Women are not suitable for working in the IT field,” “Gay will never understand.”</p>
+                    </div>
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Inappropriate Follow-up Questions Example #1</h3>
                     <h4><b>Initial Question:</b></h4>
                     <p>ELI5: Do Asexual people not feel orgasms or pleasure?</p>
@@ -459,6 +530,24 @@
                     <p>Reason: Sexual topic is involved in this data entry, which can be considered as sensitive data.</p>
                 `,
                 strongly_related_example: `
+                    <div style="text-align: center;">
+                        <h3>Relatedness of Follow-Up Question</h3>
+                        <h4>Our Question:</h4>
+                        <p>Do you think the follow-up question is related to the initial question or the answer?</p>
+                        <h4>Your Options:</h4>
+                        <p>A. Strongly Related B. Related C. Slightly Related D. Not Related</p>
+                        <p>Guideline: 
+                        <ul>
+                            <li><strong>Strongly Related</strong>: The follow-up question asks for specific definitions, particular reasons, or meanings directly from the original question and answer. The information requested is fully contained in the original question or answer.</li>
+                            <li><strong>Related</strong>: The follow-up question primarily seeks information from the original question or answer but also brings in additional, new information.</li>
+                            <li><strong>Slightly Related</strong>: The follow-up question mainly addresses other cases but has some relevance to the original question or answer.</li>
+                            <li><strong>Not Related</strong>: The follow-up question does not relate to the original question or answer.</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Strongly Related Follow-up Questions Example #1</h3>
                     <h4><b>Initial Question:</b></h4>
                     <p>ELI5: How is 2FA security by-passed?</p>
@@ -473,6 +562,24 @@
                     <p>Reason: The follow-up question is asking for elaboration on the solutions about how to prevent a SIM swap, and “SIM swap” appears in the answer. In addition, there is no other new information in the follow-up, and thus it can be considered as strongly related.</p>
                 `,
                 related_example: `
+                    <div style="text-align: center;">
+                        <h3>Relatedness of Follow-Up Question</h3>
+                        <h4>Our Question:</h4>
+                        <p>Do you think the follow-up question is related to the initial question or the answer?</p>
+                        <h4>Your Options:</h4>
+                        <p>A. Strongly Related B. Related C. Slightly Related D. Not Related</p>
+                        <p>Guideline: 
+                        <ul>
+                            <li><strong>Strongly Related</strong>: The follow-up question asks for specific definitions, particular reasons, or meanings directly from the original question and answer. The information requested is fully contained in the original question or answer.</li>
+                            <li><strong>Related</strong>: The follow-up question primarily seeks information from the original question or answer but also brings in additional, new information.</li>
+                            <li><strong>Slightly Related</strong>: The follow-up question mainly addresses other cases but has some relevance to the original question or answer.</li>
+                            <li><strong>Not Related</strong>: The follow-up question does not relate to the original question or answer.</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Related Follow-up Questions Example #1</h3>
 
                     <h4><b>Initial Question:</b></h4>
@@ -494,6 +601,24 @@
                     <p>Reason: This follow-up question mainly asks information about NFTs but relates specifically to the concept of “royalties for memes,” which is a relevant extension of the original topic.</p>
                 `,
                 slightly_related_example: `
+                    <div style="text-align: center;">
+                        <h3>Relatedness of Follow-Up Question</h3>
+                        <h4>Our Question:</h4>
+                        <p>Do you think the follow-up question is related to the initial question or the answer?</p>
+                        <h4>Your Options:</h4>
+                        <p>A. Strongly Related B. Related C. Slightly Related D. Not Related</p>
+                        <p>Guideline: 
+                        <ul>
+                            <li><strong>Strongly Related</strong>: The follow-up question asks for specific definitions, particular reasons, or meanings directly from the original question and answer. The information requested is fully contained in the original question or answer.</li>
+                            <li><strong>Related</strong>: The follow-up question primarily seeks information from the original question or answer but also brings in additional, new information.</li>
+                            <li><strong>Slightly Related</strong>: The follow-up question mainly addresses other cases but has some relevance to the original question or answer.</li>
+                            <li><strong>Not Related</strong>: The follow-up question does not relate to the original question or answer.</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Slightly Related Follow-up Questions Example</h3>
 
                     <h4><b>Initial Question:</b></h4>
@@ -509,6 +634,24 @@
                     <p>Reason: This follow-up question is asking whether the information in the answer is also applicable to other cases, like software installation. The goal is to apply the principle of “fixing” to the software context while also referencing the idea in the original answer. Therefore, it is slightly related to the given answer.</p>
                 `,
                 not_related_example: `
+                    <div style="text-align: center;">
+                        <h3>Relatedness of Follow-Up Question</h3>
+                        <h4>Our Question:</h4>
+                        <p>Do you think the follow-up question is related to the initial question or the answer?</p>
+                        <h4>Your Options:</h4>
+                        <p>A. Strongly Related B. Related C. Slightly Related D. Not Related</p>
+                        <p>Guideline: 
+                        <ul>
+                            <li><strong>Strongly Related</strong>: The follow-up question asks for specific definitions, particular reasons, or meanings directly from the original question and answer. The information requested is fully contained in the original question or answer.</li>
+                            <li><strong>Related</strong>: The follow-up question primarily seeks information from the original question or answer but also brings in additional, new information.</li>
+                            <li><strong>Slightly Related</strong>: The follow-up question mainly addresses other cases but has some relevance to the original question or answer.</li>
+                            <li><strong>Not Related</strong>: The follow-up question does not relate to the original question or answer.</li>
+                        </ul>
+                        </p>
+                    </div>
+                    <hr>
+                    <br>
+
                     <h3 style="text-align: center;">Not Related Follow-up Questions Example</h3>
 
                     <h4><b>Initial Question:</b></h4>
@@ -525,18 +668,21 @@
                 `
             };
 
-            window.onload = function () {
-                changeContent('valid_example');
+            function changeContent(example_name, button) {
+                if (button) {
+                    const buttons = document.querySelectorAll('.example-buttons');
+                    buttons.forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+
+                    button.classList.add('selected');
+                }
+
+                document.getElementById('right-section').innerHTML = examples[example_name];
             };
 
-            function changeContent(example_name, button) {
-                const buttons = document.querySelectorAll('.example-buttons');
-                buttons.forEach(btn => {
-                    btn.classList.remove('selected');
-                }); 
-
-                button.classList.add('selected');
-                document.getElementById('right-section').innerHTML = examples[example_name];
+            window.onload = function () {
+                changeContent('valid_example', null);
             };
         </script>
 
